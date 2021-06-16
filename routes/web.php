@@ -17,10 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//// Auth routes //////
 Auth::routes();
+
+//// Dashboard ////////
 Route::prefix('admin')->middleware(['auth', 'role:ROLE_ADMIN'])->group(function () {
     Route::get('/', [App\Http\Controllers\Dashboard\Admin\AdminController::class, 'index']);
-    Route::get('/users', [App\Http\Controllers\Dashboard\Admin\AdminController::class, '']);
+    Route::get('/users', [App\Http\Controllers\Dashboard\Admin\AdminController::class, 'users']);
 
 });
 Route::prefix('teacher')->middleware(['auth', 'role:ROLE_TEACHER'])->group(function () {
@@ -31,8 +35,10 @@ Route::prefix('student')->middleware(['auth', 'role:ROLE_STUDENT'])->group(funct
     Route::get('/', [App\Http\Controllers\Dashboard\Student\StudentController::class, 'index']);
 });
 
-
-
+////// API ///////
+Route::resource('period', App\Http\Controllers\Api\PeriodController::class)->middleware(['auth', 'role:ROLE_STUDENT','role:ROLE_TEACHER']);
+Route::resource('grade', App\Http\Controllers\Api\GradesController::class)->middleware(['auth', 'role:ROLE_TEACHER']);
+Route::resource('user', App\Http\Controllers\Api\UserController::class)->middleware(['auth', 'role:ROLE_ADMIN']);
 
 
 

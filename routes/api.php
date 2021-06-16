@@ -15,7 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-    Route::middleware(['auth', 'role:ROLE_STUDENT','role:ROLE_TEACHER'])->resource('period', App\Http\Controllers\Api\PeriodController::class);
-    Route::middleware(['auth', 'role:ROLE_STUDENT','role:ROLE_TEACHER'])->resource('grade', App\Http\Controllers\Api\GradesController::class);
-    Route::middleware(['auth', 'role:ROLE_ADMIN'])->resource('user', App\Http\Controllers\Api\UserController::class);
+
 

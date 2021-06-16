@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Models\RoleUser;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -50,7 +52,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'fullname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,10 +67,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+
+        $user =  User::create([
+            'username' => $data['username'],
+            'fullname' => $data['fullname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        RoleUser::create([
+            'user_id' => $user->id,
+            'role_id' => $data['role']??2
+        ]);
+        $roleName = $user->getRoleName($user->id);
+        $user->role = $roleName;
+        if($roleName){
+            $this->redirectTo = RouteServiceProvider::DASHBOARD[$roleName];
+            session(['route'=> $this->redirectTo,'user'=>$user]);
+        }
+        return $user;
     }
 }

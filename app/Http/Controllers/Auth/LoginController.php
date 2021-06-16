@@ -45,9 +45,10 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         $roleName = $user->getRoleName($user->id);
+        $user->role = $roleName;
         if($roleName){
             $this->redirectTo = RouteServiceProvider::DASHBOARD[$roleName];
-            session(['route'=> $this->redirectTo]);
+            session(['route'=> $this->redirectTo,'user'=>$user]);
         }
     }
 }
