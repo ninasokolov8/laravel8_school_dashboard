@@ -47,6 +47,7 @@ class LoginController extends Controller
         $roleName = $user->getRoleName($user->id);
         if($roleName){
             $this->redirectTo = RouteServiceProvider::DASHBOARD[$roleName];
+            session(['route'=> $this->redirectTo]);
         }
     }
 }

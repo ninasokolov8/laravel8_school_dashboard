@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Super Admin Dashboard</div>
+                <div class="panel-heading">Student Dashboard</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -14,10 +14,10 @@
                         </div>
                     @endif
 
-                        This is Admin Dashboard. You must be super privileged to be here !
+                        This is student Dashboard. You must be super privileged to be here !
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection 
+@endsection

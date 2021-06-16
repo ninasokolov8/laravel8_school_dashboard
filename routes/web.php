@@ -17,9 +17,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/admin', [App\Http\Controllers\Auth\AdminController::class, 'index']);
-Route::get('/teacher', [App\Http\Controllers\Auth\TeacherController::class, 'index']);
-
 Auth::routes();
+Route::prefix('admin')->middleware(['auth', 'role:ROLE_ADMIN'])->group(function () {
+    Route::get('/', [App\Http\Controllers\Dashboard\Admin\AdminController::class, 'index']);
+    Route::get('/users', [App\Http\Controllers\Dashboard\Admin\AdminController::class, '']);
+
+});
+Route::prefix('teacher')->middleware(['auth', 'role:ROLE_TEACHER'])->group(function () {
+    Route::get('/', [App\Http\Controllers\Dashboard\Teacher\TeacherController::class, 'index']);
+
+});
+Route::prefix('student')->middleware(['auth', 'role:ROLE_STUDENT'])->group(function () {
+    Route::get('/', [App\Http\Controllers\Dashboard\Student\StudentController::class, 'index']);
+});
+
+
+
+
+
+
 

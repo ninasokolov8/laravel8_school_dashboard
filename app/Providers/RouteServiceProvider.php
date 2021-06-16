@@ -18,12 +18,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
     public const DASHBOARD = [
         'ROLE_ADMIN' =>'/admin',
-        'ROLE_STUDENT',
-        'ROLE_TEACHER',
-        'ROLE_SUPERADMIN'=>'/superadmin'
+        'ROLE_STUDENT'=>'/student',
+        'ROLE_TEACHER'=>'/teacher',
     ];
     /**
      * The controller namespace for the application.
