@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
 
 <div class="card">
@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.lessons.store") }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("lessons.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label class="required" for="class_id">{{ trans('cruds.lesson.fields.class') }}</label>

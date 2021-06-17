@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\RoleUser;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,7 +20,7 @@ class UserController extends Controller
     {
         $users = User::latest()->paginate(5);
 
-        return view('dashboard.admin.users', compact('users'))
+        return view('dashboard.admin.users.users', compact('users'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -29,7 +31,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('dashboard.admin.users.create');
     }
 
     /**
@@ -40,17 +42,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'introduction' => 'required',
-            'location' => 'required',
-            'cost' => 'required'
-        ]);
+        try{
+            $data = $request->validate([
+                'username' => ['required', 'string', 'max:255'],
+                'fullname' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+            $user =  User::create([
+                'username' => $data['username'],
+                'fullname' => $data['fullname'],
+                'email' => $data['email'],
+                'password' => \Hash::make($data['password']),
+            ]);
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => $data['role']??2
+            ]);
 
-        User::create($request->all());
-
-        return redirect()->route('dashboard.admin.users')
+        }catch (\Exception $e){
+            dd($e->getMessage());
+        }
+        return redirect()->route('admin.users')
             ->with('success', 'User created successfully.');
+
     }
 
     /**
@@ -61,7 +76,7 @@ class UserController extends Controller
      */
     public function show($user)
     {
-        return view('dashboard.admin.user', compact('user'));
+        return view('dashboard.admin.users.user', compact('user'));
     }
 
     /**
@@ -76,27 +91,27 @@ class UserController extends Controller
         $user->role = $user->getRoleName($id);
         $message =['username'=>'wrong'];
         $errors =['username'=>'wrong'];
-        return view('dashboard.admin.edit',compact('user','message','errors') );
+        return view('dashboard.admin.users.edit',compact('user','message','errors') );
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $user
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $user)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'introduction' => 'required',
-            'location' => 'required',
-            'cost' => 'required'
+            'username' => ['required', 'string', 'max:255'],
+            'fullname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
         ]);
+        $user =User::findOrFail($id);
         $user->update($request->all());
 
-        return redirect()->route('dashboard.admin.user')
+        return redirect()->route('admin.users')
             ->with('success', 'User updated successfully');
     }
 

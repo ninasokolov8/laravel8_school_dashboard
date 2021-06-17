@@ -24,7 +24,7 @@ Auth::routes();
 //// Dashboard ////////
 Route::prefix('admin')->middleware(['auth', 'role:ROLE_ADMIN'])->group(function () {
     Route::get('/', [App\Http\Controllers\Dashboard\Admin\AdminController::class, 'index']);
-    Route::get('/users', [App\Http\Controllers\Dashboard\Admin\AdminController::class, 'users'])->name('admin.users');;
+    Route::get('/users', [App\Http\Controllers\Dashboard\Admin\AdminController::class, 'users'])->name('admin.users');
 
 });
 Route::prefix('teacher')->middleware(['auth', 'role:ROLE_TEACHER'])->group(function () {

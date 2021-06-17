@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 use App\Models\RoleUser;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -40,7 +39,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except('logout');
+
     }
 
     /**
@@ -65,9 +65,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    public function create(array $data)
     {
-
         $user =  User::create([
             'username' => $data['username'],
             'fullname' => $data['fullname'],
@@ -80,7 +79,7 @@ class RegisterController extends Controller
         ]);
         $roleName = $user->getRoleName($user->id);
         $user->role = $roleName;
-        if($roleName){
+        if($roleName ){
             $this->redirectTo = RouteServiceProvider::DASHBOARD[$roleName];
             session(['route'=> $this->redirectTo,'user'=>$user]);
         }

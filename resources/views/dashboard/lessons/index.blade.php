@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
 @can('lesson_create')
     <div style="margin-bottom: 10px;" class="row">

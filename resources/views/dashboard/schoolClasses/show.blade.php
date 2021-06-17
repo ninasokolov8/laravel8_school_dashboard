@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
 
 <div class="card">
@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.school-classes.index') }}">
+                <a class="btn btn-default" href="{{ route('classes.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -34,7 +34,7 @@
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.school-classes.index') }}">
+                <a class="btn btn-default" href="{{ route('classes.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -60,10 +60,10 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="class_lessons">
-            @includeIf('admin.schoolClasses.relationships.classLessons', ['lessons' => $schoolClass->classLessons])
+            @includeIf('dashboard.schoolClasses.relationships.classLessons', ['lessons' => $schoolClass->classLessons])
         </div>
         <div class="tab-pane" role="tabpanel" id="class_users">
-            @includeIf('admin.schoolClasses.relationships.classUsers', ['users' => $schoolClass->classUsers])
+            @includeIf('dashboard.schoolClasses.relationships.classUsers', ['users' => $schoolClass->classUsers])
         </div>
     </div>
 </div>

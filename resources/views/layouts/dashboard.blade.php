@@ -63,7 +63,28 @@
                                 </li>
                             @endif
                         @else
+
+
+
+
+
                             @if (session()->get('user.role') == "ROLE_ADMIN")
+                                    <li class="nav-item">
+                                        <a href="{{ route("classes.index") }}" class="nav-link {{ request()->is('admin/school-classes') || request()->is('admin/school-classes/*') ? 'active' : '' }}">
+                                            <i class="fa-fw fas fa-school nav-icon">
+
+                                            </i>
+                                            {{ trans('cruds.schoolClass.title') }}
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route("lessons.index") }}" class="nav-link {{ request()->is('admin/lessons') || request()->is('admin/lessons/*') ? 'active' : '' }}">
+                                            <i class="fa-fw fas fa-clock nav-icon">
+
+                                            </i>
+                                            {{ trans('cruds.lesson.title') }}
+                                        </a>
+                                    </li>
                                 <li  class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link " href="{{ route('admin.users') }}"  >
                                     Users

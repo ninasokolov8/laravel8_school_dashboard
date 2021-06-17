@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
 @can('school_class_create')
     <div style="margin-bottom: 10px;" class="row">
@@ -49,28 +49,28 @@
                                 {{ $schoolClass->name ?? '' }}
                             </td>
                             <td>
-                                <a href="{{ route('admin.calendar.index') }}?class_id={{ $schoolClass->id }}">View Schedule</a>
+                                <a href="{{ route('calendar.index') }}?class_id={{ $schoolClass->id }}">View Schedule</a>
                             </td>
                             <td>
-                                @can('school_class_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.school-classes.show', $schoolClass->id) }}">
+                                @if (session()->get('user.role') == "ROLE_ADMIN")
+                                    <a class="btn btn-xs btn-primary" href="{{ route('classes.show', $schoolClass->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
-                                @endcan
 
-                                @can('school_class_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.school-classes.edit', $schoolClass->id) }}">
+
+
+                                    <a class="btn btn-xs btn-info" href="{{ route('classes.edit', $schoolClass->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
-                                @endcan
 
-                                @can('school_class_delete')
-                                    <form action="{{ route('admin.school-classes.destroy', $schoolClass->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+
+
+                                    <form action="{{ route('classes.destroy', $schoolClass->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                     </form>
-                                @endcan
+                                @endif
 
                             </td>
 

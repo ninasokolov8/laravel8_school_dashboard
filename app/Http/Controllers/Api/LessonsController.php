@@ -2,88 +2,120 @@
 
 namespace App\Http\Controllers\Api;
 
+
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyLessonRequest;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
-use App\Lesson;
-use App\SchoolClass;
-use App\User;
-use Gate;
+use App\Models\Lesson;
+use App\Models\SchoolClass;
+use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class LessonsController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Application|Factory|View|Response
+     */
     public function index()
     {
-        abort_if(Gate::denies('lesson_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $lessons = Lesson::latest()->paginate(5);
+        return view('dashboard.lessons.index', compact('lessons'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
 
-        $lessons = Lesson::all();
-
-        return view('admin.lessons.index', compact('lessons'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Application|Factory|View|Response
+     */
     public function create()
     {
-        abort_if(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $classes = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $teachers = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.lessons.create', compact('classes', 'teachers'));
+        return view('dashboard.lessons.create', compact('classes', 'teachers'));
+
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(StoreLessonRequest $request)
     {
         $lesson = Lesson::create($request->all());
 
-        return redirect()->route('admin.lessons.index');
+        return redirect()->route('dashboard.lessons.index')
+            ->with('success', 'User created successfully.');
+
+
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param Lesson $lesson
+     * @return Application|Factory|View|Response
+     */
+    public function show(Lesson $lesson)
+    {
+
+
+        $lesson->load('class', 'teacher');
+
+        return view('dashboard.lessons.show', compact('lesson'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param Lesson $lesson
+     * @return Application|Factory|View|Response
+     */
     public function edit(Lesson $lesson)
     {
-        abort_if(Gate::denies('lesson_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $classes = SchoolClass::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $teachers = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $lesson->load('class', 'teacher');
 
-        return view('admin.lessons.edit', compact('classes', 'teachers', 'lesson'));
+        return view('dashboard.lessons.edit', compact('classes', 'teachers', 'lesson'));
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     */
 
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
         $lesson->update($request->all());
 
-        return redirect()->route('admin.lessons.index');
+        return redirect()->route('dashboard.lessons.index');
     }
 
-    public function show(Lesson $lesson)
-    {
-        abort_if(Gate::denies('lesson_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $lesson->load('class', 'teacher');
-
-        return view('admin.lessons.show', compact('lesson'));
-    }
 
     public function destroy(Lesson $lesson)
     {
-        abort_if(Gate::denies('lesson_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
 
         $lesson->delete();
 
         return back();
-    }
-
-    public function massDestroy(MassDestroyLessonRequest $request)
-    {
-        Lesson::whereIn('id', request('ids'))->delete();
-
-        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

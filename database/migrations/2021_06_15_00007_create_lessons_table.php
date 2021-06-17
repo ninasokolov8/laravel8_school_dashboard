@@ -13,8 +13,15 @@ class CreateLessonsTable extends Migration
             $table->integer('weekday');
             $table->time('start_time');
             $table->time('end_time');
+            $table->unsignedInteger('teacher_id')->nullable();
+            $table->unsignedInteger('class_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('lessons', function($table) {
+            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('class_id')->references('id')->on('school_classes');
         });
     }
     /**

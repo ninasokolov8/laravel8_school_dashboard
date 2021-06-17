@@ -7,7 +7,11 @@
             <div class="card">
                     <div class="card-header">{{ __('Edit user - ') . $user->username}}</div>
                 <div class="card-body">
-                    <form method="POST">
+
+
+                        <form method="POST" action="{{ route('user.update',[$user->id]) }}">
+                            @csrf
+                            @method('PUT')
                         <div class="form-group row">
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('User Name') }}</label>
 
@@ -34,38 +38,8 @@
 
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="role" class="form-control" name="role" >
-                                    @if (session()->get('user.role') == "ROLE_ADMIN")
-                                    <option value="1" @if($user->role =="ROLE_ADMIN" )selected="selected"@endif>Admin</option>
-                                    <option value="3"  @if($user->role =="ROLE_TEACHER" )selected="selected"@endif>Teacher</option>
-                                    @endif
-                                        <option value="2"  @if($user->role =="ROLE_STUDENT" )selected="selected"@endif>Student</option>
-                                </select>
 
 
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control " name="password" required autocomplete="new-password">
-
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

@@ -6,68 +6,96 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroySchoolClassRequest;
 use App\Http\Requests\StoreSchoolClassRequest;
 use App\Http\Requests\UpdateSchoolClassRequest;
-use App\SchoolClass;
-use Gate;
+use App\Models\SchoolClass;
 use http\Client\Response;
 use Illuminate\Http\Request;
 
 class SchoolClassesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        abort_if(Gate::denies('school_class_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $schoolClasses = SchoolClass::all();
 
-        return view('admin.schoolClasses.index', compact('schoolClasses'));
+        return view('dashboard.schoolClasses.index', compact('schoolClasses'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        abort_if(Gate::denies('school_class_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.schoolClasses.create');
+        return view('dashboard.schoolClasses.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param StoreSchoolClassRequest $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(StoreSchoolClassRequest $request)
     {
         $schoolClass = SchoolClass::create($request->all());
 
-        return redirect()->route('admin.school-classes.index');
+        return redirect()->route('dashboard.school-classes.index');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param SchoolClass $schoolClass
+     * @return \Illuminate\Http\Response
+     */
+    public function show(SchoolClass $schoolClass)
+    {
+        $schoolClass->load('classLessons', 'classUsers');
+
+        return view('dashboard.schoolClasses.show', compact('schoolClass'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param SchoolClass $schoolClass
+     * @return \Illuminate\Http\Response
+     */
     public function edit(SchoolClass $schoolClass)
     {
-        abort_if(Gate::denies('school_class_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.schoolClasses.edit', compact('schoolClass'));
+        return view('dashboard.schoolClasses.edit', compact('schoolClass'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UpdateSchoolClassRequest $request
+     * @param SchoolClass $schoolClass
+     * @return \Illuminate\Http\Response
+     */
     public function update(UpdateSchoolClassRequest $request, SchoolClass $schoolClass)
     {
         $schoolClass->update($request->all());
 
-        return redirect()->route('admin.school-classes.index');
+        return redirect()->route('dashboard.school-classes.index');
     }
-
-    public function show(SchoolClass $schoolClass)
-    {
-        abort_if(Gate::denies('school_class_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $schoolClass->load('classLessons', 'classUsers');
-
-        return view('admin.schoolClasses.show', compact('schoolClass'));
-    }
-
     public function destroy(SchoolClass $schoolClass)
     {
-        abort_if(Gate::denies('school_class_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $schoolClass->delete();
 
         return back();
     }
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param MassDestroySchoolClassRequest $request
+     * @return \Illuminate\Http\Response
+     */
     public function massDestroy(MassDestroySchoolClassRequest $request)
     {
         SchoolClass::whereIn('id', request('ids'))->delete();

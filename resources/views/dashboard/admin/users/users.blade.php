@@ -1,6 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+    @if(!empty($message))
+    <div>
+        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+    </div>
+    @endif
+    <div  class="container pt-5"><a href="{{ route('user.create') }}">Create user +</a></div>
+
     <div class="container pt-5">
         <div class="row justify-content-center">
         <table class="table">
