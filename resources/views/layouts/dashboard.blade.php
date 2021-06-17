@@ -23,9 +23,19 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                @if (session()->get('user.role') == "ROLE_ADMIN")
+                <a class="navbar-brand" href="{{ url('/admin/') }}">
+                    {{ config('app.name', 'Dashboard') }}
                 </a>
+                @elseif (session()->get('user.role') == "ROLE_STUDENT")
+                    <a class="navbar-brand" href="{{ url('/student/') }}">
+                        {{ config('app.name', 'Dashboard') }}
+                    </a>
+                @elseif (session()->get('user.role') == "ROLE_TEACHER")
+                    <a class="navbar-brand" href="{{ url('/teacher/') }}">
+                        {{ config('app.name', 'Dashboard') }}
+                    </a>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -53,43 +63,64 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-
-                                    {{ Auth::user()->username }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
                             @if (session()->get('user.role') == "ROLE_ADMIN")
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <li  class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="{{ route('admin.users') }}"  >
                                     Users
                                 </a>
+                                </li>
+                                <li  class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="{{ route('calendar.index') }}" >
+                                    Calendar
+                                </a>
+                                </li>
                             @elseif (session()->get('user.role') == "ROLE_STUDENT")
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <li  class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="{{ route('logout') }}"  >
                                     Classes
                                 </a>
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                </li>
+                                <li  class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="{{ route('calendar.index') }}" >
                                     Grades
                                 </a>
+                                </li>
+                                <li  class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="{{ route('calendar.index') }}"  >
+                                    Calendar
+                                </a>
+                                </li>
 
                             @elseif (session()->get('user.role') == "ROLE_TEACHER")
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <li  class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="{{ route('logout') }}" >
                                     Classes
                                 </a>
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                </li>
+                                <li  class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="{{ route('logout') }}"  >
                                     Grades
                                 </a>
+                                </li>
+                                <li  class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link " href="{{ route('calendar.index') }}" >
+                                    Calendar
+                                </a>
+                                </li>
                             @endif
+                                <li class="nav-item dropdown">
+
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                                        <a class="nav-link" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        @csrf
+                                    </form>
+
+                                </li>
                         @endguest
                     </ul>
                 </div>

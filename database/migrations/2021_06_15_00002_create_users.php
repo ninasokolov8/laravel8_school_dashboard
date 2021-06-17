@@ -18,8 +18,8 @@ class CreateUsers extends Migration
             $table->string('username', 15);
             $table->string('password');
             $table->string('fullname', 50);
-            $table->string('remember_token', 255);
-            $table->dateTime('email_verified_at');
+            $table->string('remember_token', 255)->nullable();
+            $table->dateTime('email_verified_at')->nullable();
             $table->string('email', 100);
             $table->timestamps();
         });
