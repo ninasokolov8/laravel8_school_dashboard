@@ -1,63 +1,45 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
+Route::redirect('/', '/login');
+Route::get('/home', function () {
+    $routeName = auth()->user() && (auth()->user()->is_student || auth()->user()->is_teacher) ? 'admin.calendar.index' : 'admin.home';
+    if (session('status')) {
+        return redirect()->route($routeName)->with('status', session('status'));
+    }
+
+    return redirect()->route($routeName);
 });
 
+Auth::routes(['register' => false]);
+// Admin
 
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    // Permissions
+    Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
+    Route::resource('permissions', 'PermissionsController');
 
-Route::resource('api/user/lessons', App\Http\Controllers\Api\LessonUserController::class);
+    // Roles
+    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
+    Route::resource('roles', 'RolesController');
 
-// add user, edit user, delete user,show user
-Route::resource('user', App\Http\Controllers\Api\UserController::class)->middleware(['auth', 'role:ROLE_ADMIN']);
+    // Users
+    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+    Route::resource('users', 'UsersController');
 
+    // Lessons
+    Route::delete('lessons/destroy', 'LessonsController@massDestroy')->name('lessons.massDestroy');
+    Route::resource('lessons', 'LessonsController');
 
+    // School Classes
+    Route::delete('school-classes/destroy', 'SchoolClassesController@massDestroy')->name('school-classes.massDestroy');
+    Route::resource('school-classes', 'SchoolClassesController');
 
+    // Grades
+    Route::delete('grades/destroy', 'GradesController@massDestroy')->name('grades.massDestroy');
+    Route::resource('grades', 'GradesController');
 
-//// Auth routes //////
-Auth::routes();
-
-//// Dashboard ////////
-Route::prefix('admin')->middleware(['auth', 'role:ROLE_ADMIN'])->group(function () {
-    Route::get('/', [App\Http\Controllers\Dashboard\Admin\AdminController::class, 'index']);
-    Route::get('/users', [App\Http\Controllers\Dashboard\Admin\AdminController::class, 'users'])->name('admin.users');
-
+    Route::get('calendar', 'CalendarController@index')->name('calendar.index');
 });
-Route::prefix('teacher')->middleware(['auth', 'role:ROLE_TEACHER'])->group(function () {
-    Route::get('/', [App\Http\Controllers\Dashboard\Teacher\TeacherController::class, 'index']);
-
-});
-Route::prefix('student')->middleware(['auth', 'role:ROLE_STUDENT'])->group(function () {
-    Route::get('/', [App\Http\Controllers\Dashboard\Student\StudentController::class, 'index']);
-});
-
-Route::get('/calendar', [App\Http\Controllers\Api\CalendarController::class, 'index'])->name('calendar.index');
-
-////// API ///////
-Route::resource('grade', App\Http\Controllers\Api\GradesController::class)->middleware(['auth', 'role:ROLE_TEACHER']);
-
-
-
-
-
-
-Route::resource('lessons', App\Http\Controllers\Api\LessonsController::class);//->middleware(['auth']);
-Route::resource('classes', App\Http\Controllers\Api\SchoolClassesController::class);//->middleware(['auth']);
-
-
-
-

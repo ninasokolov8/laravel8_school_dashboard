@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Lesson;
+use App\Lesson;
 
 class CalendarService
 {
@@ -17,12 +17,13 @@ class CalendarService
         foreach ($timeRange as $time)
         {
             $timeText = $time['start'] . ' - ' . $time['end'];
-            $calendarData[$timeText] = [];
+            if(!array_key_exists($timeText,$calendarData)){
+                $calendarData[$timeText] = [];
+            }
 
             foreach ($weekDays as $index => $day)
             {
                 $lesson = $lessons->where('weekday', $index)->where('start_time', $time['start'])->first();
-
                 if ($lesson)
                 {
                     array_push($calendarData[$timeText], [
@@ -41,7 +42,6 @@ class CalendarService
                 }
             }
         }
-
         return $calendarData;
     }
 }

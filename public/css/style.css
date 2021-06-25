@@ -1,0 +1,52 @@
+.sidenav-s{
+    background: #0B525B!important;
+}
+.sidebar .nav-link.active{
+    background: #00A0A3!important;
+
+}
+.navbar-brand-full{
+    color:#ffffff !important;
+}
+.sidebar .sidebar-minimizer{
+    background: #00A0A3 !important;
+}
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #00A0A3 !important;
+    border-bottom: 1px solid #0B525B !important;
+}
+.badge-info {
+    color:#ffffff !important;
+    background-color: #2C97B5 !important;
+
+}
+.buttons-excel{
+    display:none !important;
+}
+.btn-success {
+    color: #fff;
+    background-color: #C79CD3 !important;
+    border-color: #703880 !important;
+}
+.btn-danger {
+    color: #fff;
+    background-color:#9A329A !important;
+    border-color: #703880!important;
+}
+.btn-info {
+    color:#ffffff !important;
+    background-color: #2C97B5 !important;
+    border-color: #63c2de;
+}
+.app-header {
+    position: relative;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 55px;
+    padding: 0;
+    margin: 0;
+    background-color:  #0B525B !important;
+    border-bottom: 1px solid #00A0A3;
+}
