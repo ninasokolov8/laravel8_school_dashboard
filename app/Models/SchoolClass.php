@@ -30,7 +30,7 @@ class SchoolClass extends Model
         return $this->hasMany(Lesson::class, 'class_id', 'id');
     }
 
-    public function classUsers()
+    public function classTeacher()
     {
         return $this->hasMany(User::class, 'class_id', 'id');
     }

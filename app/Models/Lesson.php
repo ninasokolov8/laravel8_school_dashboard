@@ -40,12 +40,12 @@ class Lesson extends Model
         '7' => 'Sunday',
     ];
 
-    public function getDifferenceAttribute()
+    public function getDifferenceAttribute(): int
     {
         return Carbon::parse($this->end_time)->diffInMinutes($this->start_time);
     }
 
-    public function getStartTimeAttribute($value)
+    public function getStartTimeAttribute($value): ?string
     {
         return $value ? Carbon::createFromFormat('H:i:s', $value)->format(config('panel.lesson_time_format')) : null;
     }
@@ -56,7 +56,7 @@ class Lesson extends Model
             $value)->format('H:i:s') : null;
     }
 
-    public function getEndTimeAttribute($value)
+    public function getEndTimeAttribute($value): ?string
     {
         return $value ? Carbon::createFromFormat('H:i:s', $value)->format(config('panel.lesson_time_format')) : null;
     }
@@ -67,17 +67,42 @@ class Lesson extends Model
             $value)->format('H:i:s') : null;
     }
 
-    function class()
+    function class(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(SchoolClass::class, 'class_id');
     }
+    public function students(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
 
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
+    public static function getLessonId($lessonObj){
+        return self::where(function ($query) use ($lessonObj) {
+            foreach ($lessonObj as $key => $value){
+                $query->where($key, $value);
+            }
+            })->pluck('id');
+    }
 
-    public static function isTimeAvailable($weekday, $startTime, $endTime, $class, $teacher, $lesson)
+    public static function signUserForLesson($lessonObj,$studentId): bool
+    {
+        if(!self::isTimeAvailable(
+            $lessonObj->weekday,
+            $lessonObj->startTime,
+            $lessonObj->endTime,
+            $lessonObj->class,
+            $lessonObj->teacher,
+            $lessonObj->lesson)) return false;
+
+        $lessonId = self::getLessonId($lessonObj);
+
+    }
+
+    public static function isTimeAvailable($weekday, $startTime, $endTime, $class, $teacher, $lesson): bool
     {
         $lessons = self::where('weekday', $weekday)
             ->when($lesson, function ($query) use ($lesson) {

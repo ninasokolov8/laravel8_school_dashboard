@@ -18,7 +18,7 @@ class CreateGrades extends Migration
             $table->integer('grate');
             $table->integer('student_id')->unsigned();
             $table->integer('teacher_id')->unsigned();
-            $table->integer('period_id')->unsigned();
+            $table->integer('lesson_to_user_id')->unsigned();
             $table->timestamps();
         });
     }

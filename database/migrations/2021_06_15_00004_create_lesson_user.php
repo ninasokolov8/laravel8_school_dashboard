@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeriodsToUser extends Migration
+class CreateLessonUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePeriodsToUser extends Migration
      */
     public function up()
     {
-        Schema::create('periods_to_user', function (Blueprint $table) {
+        Schema::create('lesson_user', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->unsigned();
-            $table->integer('period_id')->unsigned();
+            $table->integer('lesson_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreatePeriodsToUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('periods_to_user');
+        Schema::dropIfExists('lesson_user');
     }
 }

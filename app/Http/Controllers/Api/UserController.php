@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddUserToLessonRequest;
+use App\Http\Requests\RemoveUserFromLessonRequest;
+use App\Models\Lesson;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -127,5 +131,24 @@ class UserController extends Controller
 
         return redirect()->route('dashboard.admin.users')
             ->with('success', 'User deleted successfully');
+    }
+
+
+
+
+
+
+    public function addUserToLesson(AddUserToLessonRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $lesson = Lesson::findOrFail($request->lessonId);
+        $user =User::findOrFail($request->userId);
+        $user->lessons()->attach($lesson);
+        return response()->json('User added successfully!');
+    }
+    public function removeUserFromLesson(RemoveUserFromLessonRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $user =User::findOrFail($request->userId);
+        $user->lessons()->detach($request->lessonId);
+        return response()->json('User removed from this lesson');
     }
 }

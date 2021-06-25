@@ -17,11 +17,15 @@ class DatabaseSeeder extends Seeder
         \DB::table('school_classes')->insert([
             [
                 'id' => 1,
-                'name' => 'First class'
+                'name' => 'Mathematics'
             ],
             [
                 'id' => 2,
-                'name' => 'Second class'
+                'name' => 'Biology'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Art'
             ]
         ]);
          \DB::table('users')->insert([[
@@ -91,7 +95,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id'         => 1,
                 'teacher_id' => 2,
-                'class_id'   => 1,
+                'class_id'   => 2,
                 'weekday'    => 1,
                 'start_time' => '10:00',
                 'end_time'   => '12:00',
@@ -107,7 +111,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id'         => 3,
                 'teacher_id' => 4,
-                'class_id'   => 1,
+                'class_id'   => 3,
                 'weekday'    => 1,
                 'start_time' => '14:00',
                 'end_time'   => '16:00',
@@ -139,7 +143,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id'         => 7,
                 'teacher_id' => 4,
-                'class_id'   => 1,
+                'class_id'   => 3,
                 'weekday'    => 2,
                 'start_time' => '12:00',
                 'end_time'   => '14:00',
@@ -155,7 +159,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id'         => 9,
                 'teacher_id' => 2,
-                'class_id'   => 1,
+                'class_id'   => 2,
                 'weekday'    => 3,
                 'start_time' => '12:00',
                 'end_time'   => '14:00',
@@ -171,7 +175,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id'         => 11,
                 'teacher_id' => 4,
-                'class_id'   => 1,
+                'class_id'   => 3,
                 'weekday'    => 4,
                 'start_time' => '10:00',
                 'end_time'   => '12:00',
@@ -187,7 +191,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id'         => 13,
                 'teacher_id' => 4,
-                'class_id'   => 1,
+                'class_id'   => 3,
                 'weekday'    => 4,
                 'start_time' => '14:00',
                 'end_time'   => '16:00',
@@ -203,7 +207,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id'         => 15,
                 'teacher_id' => 2,
-                'class_id'   => 1,
+                'class_id'   => 2,
                 'weekday'    => 5,
                 'start_time' => '10:00',
                 'end_time'   => '12:00',
@@ -227,6 +231,12 @@ class DatabaseSeeder extends Seeder
             ['role_id' => 2,'user_id'=>7],
 
               ]);
+        \DB::table('classes_to_teacher')->insert([
+            ['class_id' => 1,'teacher_id'=>3],
+            ['class_id' => 2,'teacher_id'=>2],
+            ['class_id' => 3,'teacher_id'=>4]
+
+        ]);
 
     }
 }

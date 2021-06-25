@@ -18,6 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+Route::resource('api/user/lessons', App\Http\Controllers\Api\LessonUserController::class);
+
+// add user, edit user, delete user,show user
+Route::resource('user', App\Http\Controllers\Api\UserController::class)->middleware(['auth', 'role:ROLE_ADMIN']);
+
+
+
+
 //// Auth routes //////
 Auth::routes();
 
@@ -38,11 +48,15 @@ Route::prefix('student')->middleware(['auth', 'role:ROLE_STUDENT'])->group(funct
 Route::get('/calendar', [App\Http\Controllers\Api\CalendarController::class, 'index'])->name('calendar.index');
 
 ////// API ///////
-Route::resource('period', App\Http\Controllers\Api\PeriodController::class)->middleware(['auth', 'role:ROLE_STUDENT','role:ROLE_TEACHER']);
 Route::resource('grade', App\Http\Controllers\Api\GradesController::class)->middleware(['auth', 'role:ROLE_TEACHER']);
-Route::resource('user', App\Http\Controllers\Api\UserController::class)->middleware(['auth', 'role:ROLE_ADMIN']);
-Route::resource('lessons', App\Http\Controllers\Api\LessonsController::class)->middleware(['auth']);
-Route::resource('classes', App\Http\Controllers\Api\SchoolClassesController::class)->middleware(['auth']);
+
+
+
+
+
+
+Route::resource('lessons', App\Http\Controllers\Api\LessonsController::class);//->middleware(['auth']);
+Route::resource('classes', App\Http\Controllers\Api\SchoolClassesController::class);//->middleware(['auth']);
 
 
 

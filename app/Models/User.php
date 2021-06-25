@@ -28,6 +28,10 @@ class User extends Authenticatable
             ->belongsToMany('App\Models\Role')
             ->withTimestamps();
     }
+    public function lessons(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Lesson::class);
+    }
 
     public function users()
     {

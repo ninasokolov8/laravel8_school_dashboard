@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeriods extends Migration
+class CreateClassesToTeacher extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePeriods extends Migration
      */
     public function up()
     {
-        Schema::create('periods', function (Blueprint $table) {
+        Schema::create('classes_to_teacher', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20);
-            $table->string('description', 200);
+            $table->integer('teacher_id')->unsigned();
+            $table->integer('class_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreatePeriods extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('periods');
+        Schema::dropIfExists('classes_to_teacher');
     }
 }

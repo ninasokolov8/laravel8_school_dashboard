@@ -22,13 +22,17 @@ class LessonsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Application|Factory|View|Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $lessons = Lesson::latest()->paginate(5);
-        return view('dashboard.lessons.index', compact('lessons'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $lessons = Lesson::all()->toArray();;//->paginate(5);
+
+      /*  return view('dashboard.lessons.index', compact('lessons'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);*/
+
+        return response()->json(compact('lessons'));
+
 
     }
 
