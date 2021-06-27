@@ -3,7 +3,7 @@
 
         <ul class="nav">
             <li class="nav-item">
-                <a href="{{ route("admin.home") }}" class="nav-link ">
+                <a href="{{ route("dashboard.home") }}" class="nav-link ">
                     <i class="nav-icon fas fa-fw fa-tachometer-alt">
 
                     </i>
@@ -21,7 +21,7 @@
                     <ul class="nav-dropdown-items">
                         @can('permission_access')
                             <li class="nav-item">
-                                <a href="{{ route("admin.permissions.index") }}" class="nav-link {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
+                                <a href="{{ route("dashboard.permissions.index") }}" class="nav-link {{ request()->is('dashboard/permissions') || request()->is('dashboard/permissions/*') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-unlock-alt nav-icon">
 
                                     </i>
@@ -31,7 +31,7 @@
                         @endcan
                         @can('role_access')
                             <li class="nav-item">
-                                <a href="{{ route("admin.roles.index") }}" class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
+                                <a href="{{ route("dashboard.roles.index") }}" class="nav-link {{ request()->is('dashboard/roles') || request()->is('dashboard/roles/*') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-briefcase nav-icon">
 
                                     </i>
@@ -41,7 +41,7 @@
                         @endcan
                         @can('user_access')
                             <li class="nav-item">
-                                <a href="{{ route("admin.users.index") }}" class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                                <a href="{{ route("dashboard.users.index") }}" class="nav-link {{ request()->is('dashboard/users') || request()->is('dashboard/users/*') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-user nav-icon">
 
                                     </i>
@@ -49,7 +49,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route("admin.users.index") }}?role=3" class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                                <a href="{{ route("dashboard.users.index") }}?role=3" class="nav-link {{ request()->is('dashboard/users') || request()->is('dashboard/users/*') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-user nav-icon">
 
                                     </i>
@@ -57,7 +57,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route("admin.users.index") }}?role=4" class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                                <a href="{{ route("dashboard.users.index") }}?role=4" class="nav-link {{ request()->is('dashboard/users') || request()->is('dashboard/users/*') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-user nav-icon">
 
                                     </i>
@@ -70,7 +70,7 @@
             @endcan
             @can('school_class_access')
                 <li class="nav-item">
-                    <a href="{{ route("admin.school-classes.index") }}" class="nav-link {{ request()->is('admin/school-classes') || request()->is('admin/school-classes/*') ? 'active' : '' }}">
+                    <a href="{{ route("dashboard.school-classes.index") }}" class="nav-link {{ request()->is('dashboard/school-classes') || request()->is('dashboard/school-classes/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-school nav-icon">
 
                         </i>
@@ -80,7 +80,7 @@
             @endcan
             @can('lesson_grade_access')
                 <li class="nav-item">
-                    <a href="{{ route("admin.grades.index") }}" class="nav-link {{ request()->is('admin/grades') || request()->is('admin/grades/*') ? 'active' : '' }}">
+                    <a href="{{ route("dashboard.grades.index") }}" class="nav-link {{ request()->is('dashboard/grades') || request()->is('dashboard/grades/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-check nav-icon">
 
                         </i>
@@ -90,7 +90,7 @@
             @endcan
             @can('lesson_access')
                 <li class="nav-item">
-                    <a href="{{ route("admin.lessons.index") }}" class="nav-link {{ request()->is('admin/lessons') || request()->is('admin/lessons/*') ? 'active' : '' }}">
+                    <a href="{{ route("dashboard.lessons.index") }}" class="nav-link {{ request()->is('dashboard/lessons') || request()->is('dashboard/lessons/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-clock nav-icon">
 
                         </i>
@@ -99,7 +99,7 @@
                 </li>
             @endcan
             <li class="nav-item">
-                <a href="{{ route("admin.calendar.index") }}" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
+                <a href="{{ route("dashboard.calendar.index") }}" class="nav-link {{ request()->is('dashboard/calendar') || request()->is('dashboard/calendar/*') ? 'active' : '' }}">
                     <i class="fa-fw fas fa-calendar nav-icon">
 
                     </i>

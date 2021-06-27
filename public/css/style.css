@@ -22,9 +22,6 @@
     background-color: #2C97B5 !important;
 
 }
-.buttons-excel{
-    display:none !important;
-}
 .btn-success {
     color: #fff;
     background-color: #C79CD3 !important;
@@ -49,4 +46,7 @@
     margin: 0;
     background-color:  #0B525B !important;
     border-bottom: 1px solid #00A0A3;
+}
+.buttons-copy, .buttons-print, .buttons-excel{
+    display:none !important;
 }
