@@ -5,6 +5,7 @@
 	use Illuminate\Http\Resources\Json\JsonResource;
 	
 	class GradesResource extends JsonResource {
+		
 		public function toArray($request) {
 			return parent::toArray($request);
 		}

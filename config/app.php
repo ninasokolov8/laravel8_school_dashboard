@@ -178,6 +178,9 @@ return [
 	    
 	    //Testing provider
 	    Asvae\ApiTester\ServiceProvider::class,
+	    
+	    // Swagger
+	    L5Swagger\L5SwaggerServiceProvider::class,
 
     ],
 

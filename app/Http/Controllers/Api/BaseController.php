@@ -9,11 +9,7 @@
 	
 	
 	class BaseController extends Controller {
-		/**
-		 * success response method.
-		 *
-		 * @return \Illuminate\Http\JsonResponse
-		 */
+		/** @OA\Info(title="School managment API - Nina", version="0.1") */
 		public function sendResponse($result, $message):\Illuminate\Http\JsonResponse {
 			$response = [
 				'success' => true, 'data' => $result, 'message' => $message,
