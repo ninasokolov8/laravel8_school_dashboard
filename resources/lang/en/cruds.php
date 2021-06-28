@@ -109,7 +109,7 @@ return [
     ],
     'grades'    => [
         'title'          => 'Studens grades',
-        'title_singular' => 'Students Grades',
+        'title_singular' => 'Student Grades',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',
@@ -125,8 +125,14 @@ return [
             'student_helper' => '',
             'teacher'        => 'Teacher Name',
             'teacher_helper' => '',
+	        'lesson'        => 'Lesson',
+	        'lesson_helper' => '',
             'grade'        => 'Lesson Grade',
             'grade_helper' => '',
+	        'weekDay'        => 'Day',
+            'weekDay_helper' => '',
+	        'class'        => 'Class',
+	        'class_helper' => '',
         ],
     ],
 ];

@@ -29,4 +29,7 @@
 		public function lessons() {
 			return $this->belongsTo(Lesson::class, 'lesson_id', 'id');
 		}
+		public function classes() {
+			return $this->belongsTo(SchoolClass::class, 'class_id', 'id');
+		}
 	}

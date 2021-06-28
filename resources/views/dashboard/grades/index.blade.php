@@ -1,6 +1,6 @@
 @extends('layouts.dashboardl')
 @section('content')
-@can('lesson_create')
+@can('lesson_grade_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route("dashboard.grades.create") }}">
@@ -42,38 +42,38 @@
                 </thead>
                 <tbody>
 
-                    @foreach($grades as $key => $lesson)
-                        <tr data-entry-id="{{ $lesson->id }}">
+                    @foreach($grades as $key => $grade)
+                        <tr data-entry-id="{{ $grade->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $lesson->id ?? '' }}
+                                {{ $grade->id ?? '' }}
                             </td>
                             <td>
-                                {{ $lesson->teachers->name ?? '' }}
+                                {{ $grade->teachers->name ?? '' }}
                             </td>
                             <td>
-                                {{ $lesson->students->name ?? '' }}
+                                {{ $grade->students->name ?? '' }}
                             </td>
                             <td>
-                                {{ $lesson->grade ?? '' }}
+                                {{ $grade->grade ?? '' }}
                             </td>
                             <td>
                                 @can('lesson_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('dashboard.lessons.show', $lesson->id) }}">
+                                    <a class="btn btn-xs btn-primary" href="{{ route('dashboard.grades.show', $grade->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
                                 @can('lesson_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('dashboard.lessons.edit', $lesson->id) }}">
+                                    <a class="btn btn-xs btn-info" href="{{ route('dashboard.grades.edit', $grade->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('lesson_delete')
-                                    <form action="{{ route('dashboard.lessons.destroy', $lesson->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('lesson_grade_delete')
+                                    <form action="{{ route('dashboard.grades.destroy', $grade->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">

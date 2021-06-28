@@ -45,8 +45,17 @@
 			return $this->roles()->where('id', 4)->exists();
 		}
 		
-		public function teacherLessons() {
-			return $this->hasMany(Lesson::class, 'teacher_id', 'id');
+		public static function getUsersByRole(){
+			$return =[
+				'teachers'=>[0=>['id'=>0,'name'=>trans('global.pleaseSelect')]],
+				'students'=>[0=>['id'=>0,'name'=>trans('global.pleaseSelect')]],
+			];
+			$users = self::all();
+			foreach ($users as $user){
+				if($user->getIsTeacherAttribute())array_push($return['teachers'],$user->toArray());
+				if($user->getIsStudentAttribute())array_push($return['students'],$user->toArray());
+			}
+			return $return;
 		}
 		
 		public function gradeLessons() {
