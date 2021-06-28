@@ -52,18 +52,6 @@
 		}
 		
 		
-		public static function getUsersByRole(){
-			$return =[
-				'teachers'=>[0=>['id'=>0,'name'=>trans('global.pleaseSelect')]],
-				'students'=>[0=>['id'=>0,'name'=>trans('global.pleaseSelect')]],
-			];
-			$users = self::all();
-			foreach ($users as $user){
-				if($user->getIsTeacherAttribute())array_push($return['teachers'],$user->toArray());
-				if($user->getIsStudentAttribute())array_push($return['students'],$user->toArray());
-			}
-			return $return;
-		}
 		
 		public function gradeLessons() {
 			return $this->hasMany(Grade::class, 'user_id', 'id');

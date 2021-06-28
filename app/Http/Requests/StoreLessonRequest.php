@@ -2,7 +2,6 @@
 	
 	namespace App\Http\Requests;
 	
-	use App\Models\Lesson;
 	use App\Rules\LessonTimeAvailabilityRule;
 	use Illuminate\Support\Facades\Gate;
 	use Illuminate\Foundation\Http\FormRequest;
@@ -11,7 +10,6 @@
 	class StoreLessonRequest extends FormRequest {
 		public function authorize() {
 			abort_if(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-			
 			return true;
 		}
 		

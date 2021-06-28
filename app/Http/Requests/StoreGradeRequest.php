@@ -9,7 +9,6 @@
 	class StoreGradeRequest extends FormRequest {
 		public function authorize() {
 			abort_if(Gate::denies('lesson_grade_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-			
 			return true;
 		}
 		

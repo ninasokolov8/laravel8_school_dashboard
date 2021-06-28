@@ -80,6 +80,6 @@
 		}
 		
 		function grades() {
-			$this->belongsToMany(Grade::class, 'grade_user', 'lesson_id', 'user_id');
+			return $this->hasMany(Grade::class, 'lesson_id');
 		}
 	}
