@@ -1,0 +1,2383 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "School managment API - Nina",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/grades": {
+            "get": {
+                "tags": [
+                    "Grades"
+                ],
+                "summary": "Retrieve all grades information",
+                "description": "Get grades information with their relationships",
+                "operationId": "fd961bb58c8b572ea811873a399431b1",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Grade"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Grades"
+                ],
+                "summary": "save new grade information",
+                "description": "Save grade information for user",
+                "operationId": "0808cbda37259b7a01a83cfd638b4255",
+                "requestBody": {
+                    "description": "Pass grade data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "lesson_id",
+                                    "teacher_id",
+                                    "grade"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "int",
+                                        "format": "user_id",
+                                        "example": "1"
+                                    },
+                                    "lesson_id": {
+                                        "type": "int",
+                                        "format": "lesson_id",
+                                        "example": "2"
+                                    },
+                                    "teacher_id": {
+                                        "type": "int",
+                                        "format": "teacher_id",
+                                        "example": "3"
+                                    },
+                                    "grade": {
+                                        "type": "int",
+                                        "format": "grade",
+                                        "example": "99"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Grade"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/grades/{id}": {
+            "get": {
+                "tags": [
+                    "Grades"
+                ],
+                "summary": "Retrieve specific grade record information",
+                "description": "Get grade information with his relationships",
+                "operationId": "9e96aeac56c5f6648b2f9b9e2cdc5a08",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the graade record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Grade"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Grades"
+                ],
+                "summary": "update grade information",
+                "description": "update grade information for user",
+                "operationId": "8b7e37a8327dc2673ca8cbf8a760e90d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the graade record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass grade data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "lesson_id",
+                                    "teacher_id",
+                                    "grade"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "int",
+                                        "format": "user_id",
+                                        "example": "1"
+                                    },
+                                    "lesson_id": {
+                                        "type": "int",
+                                        "format": "lesson_id",
+                                        "example": "2"
+                                    },
+                                    "teacher_id": {
+                                        "type": "int",
+                                        "format": "teacher_id",
+                                        "example": "3"
+                                    },
+                                    "grade": {
+                                        "type": "int",
+                                        "format": "grade",
+                                        "example": "99"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Grade"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Grades"
+                ],
+                "summary": "Delete specifi grade",
+                "description": "Delete specifi grade",
+                "operationId": "809ac9c306c57b11eb49ce42af9f4cc2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the graade record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Grade"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/lessons": {
+            "get": {
+                "tags": [
+                    "Lessons"
+                ],
+                "summary": "Retrieve all lessons information",
+                "description": "Get lessons information with their relationships",
+                "operationId": "6fc4fd8a3303eeefd82bd9b347c1895f",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Lesson"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Lessons"
+                ],
+                "summary": "save new lesson information",
+                "description": "Save lesson information ",
+                "operationId": "3394d3ae3a7a03b367a129ae54f7487f",
+                "requestBody": {
+                    "description": "Pass grade data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "class_id",
+                                    "teacher_id",
+                                    "weekday",
+                                    "start_time",
+                                    "end_time"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "int",
+                                        "format": "user_id",
+                                        "example": "1"
+                                    },
+                                    "teacher_id": {
+                                        "type": "int",
+                                        "format": "teacher_id",
+                                        "example": "1"
+                                    },
+                                    "weekday": {
+                                        "type": "int",
+                                        "format": "weekday",
+                                        "example": "2"
+                                    },
+                                    "start_time": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "12:00"
+                                    },
+                                    "end_time": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "14:00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Lesson"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/lessons/{id}": {
+            "get": {
+                "tags": [
+                    "Lessons"
+                ],
+                "summary": "Retrieve specific lesson record information",
+                "description": "Get lesson information with his relationships",
+                "operationId": "89dcbcab4713ec16e1f3c403ce972f43",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the lesson record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Grade"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Lessons"
+                ],
+                "summary": "update lesson information",
+                "description": "update lesson information ",
+                "operationId": "6d7e256eeca5dddeef027487ae18b3f7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the lesson record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass grade data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "class_id",
+                                    "teacher_id",
+                                    "weekday",
+                                    "start_time",
+                                    "end_time"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "int",
+                                        "format": "user_id",
+                                        "example": "1"
+                                    },
+                                    "teacher_id": {
+                                        "type": "int",
+                                        "format": "teacher_id",
+                                        "example": "1"
+                                    },
+                                    "weekday": {
+                                        "type": "int",
+                                        "format": "weekday",
+                                        "example": "2"
+                                    },
+                                    "start_time": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "12:00"
+                                    },
+                                    "end_time": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "14:00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Lesson"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Lessons"
+                ],
+                "summary": "Delete specifi lesson",
+                "description": "Delete specifi lesson",
+                "operationId": "e8e35aa758f9e61f0bebb04838efb070",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the lesson record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Lesson"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/permissions": {
+            "get": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "Retrieve all permissions information",
+                "description": "Get permissions information with their relationships",
+                "operationId": "39dce80150ee5a3c94823534ba6fb131",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "save new permission information",
+                "description": "Save permission information ",
+                "operationId": "7479b20ce0e45b753f2e815f62cac733",
+                "requestBody": {
+                    "description": "Pass grade data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "title",
+                                        "example": "this_is_new_permission"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/permissions/{id}": {
+            "get": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "Retrieve specific permission record information",
+                "description": "Get permission information with his relationships",
+                "operationId": "0d5a2b0469b1ab769b77ad5d422e28c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the permission record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "update permission information",
+                "description": "update permission information ",
+                "operationId": "ffc2b6e9283cc848301582735c6af8e7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the permission record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass permissions data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "title",
+                                        "example": "this_is_new_permission"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "Delete specifi permission",
+                "description": "Delete specifi permission",
+                "operationId": "646471bb0beab5b5f45f9a39b787ff8d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the permission record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "api/api-login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Sign in",
+                "description": "Login by email, password",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Retrieve all roles information",
+                "description": "Get permissions roles with their relationships",
+                "operationId": "a92a62bdf4e08feb0700258a348a8458",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Role"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "save new roles information",
+                "description": "Save roles information ",
+                "operationId": "20c5a1a76d4ef402bba090fb14208378",
+                "requestBody": {
+                    "description": "Pass roles data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "permissions.*",
+                                    "permissions"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "title",
+                                        "example": "this_is_new_permission"
+                                    },
+                                    "permissions.*": {
+                                        "type": "int",
+                                        "format": "permissions.*",
+                                        "example": "1"
+                                    },
+                                    "permissions": {
+                                        "type": "array string",
+                                        "format": "permissions",
+                                        "example": "[1,3]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Role"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Retrieve specific role record information",
+                "description": "Get role information with his relationships",
+                "operationId": "822cb9eda96b4c13c25f8eb1d63a97a1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the role record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Role"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "update role information",
+                "description": "update role information ",
+                "operationId": "1f6e1f3b182ec05579859e7c877aae8f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the role record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass role data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "permissions.*",
+                                    "permissions"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "title",
+                                        "example": "this_is_new_permission"
+                                    },
+                                    "permissions.*": {
+                                        "type": "int",
+                                        "format": "permissions.*",
+                                        "example": "1"
+                                    },
+                                    "permissions": {
+                                        "type": "array string",
+                                        "format": "permissions",
+                                        "example": "[1,3]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Role"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Delete specifi role",
+                "description": "Delete specifi role",
+                "operationId": "654876f5eba9942e0a5af27dede7ffa8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the role record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/Role"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/school-classes": {
+            "get": {
+                "tags": [
+                    "school-classes"
+                ],
+                "summary": "Retrieve all chool-classes information",
+                "description": "Get permissions chool-classes with their relationships",
+                "operationId": "e8e4844c69882b8018e0b7790ee00dde",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/SchoolClass"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "school-classes"
+                ],
+                "summary": "save new school-classes information",
+                "description": "Save school-classes information ",
+                "operationId": "bd3769aef7c0677f0d7a01efa4d94b82",
+                "requestBody": {
+                    "description": "Pass school-classes data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "this_is_new_class"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/SchoolClass"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/school-classes/{id}": {
+            "get": {
+                "tags": [
+                    "school-classes"
+                ],
+                "summary": "Retrieve specific school-classes record information",
+                "description": "Get school-classes information with his relationships",
+                "operationId": "5fc20c092f18b2b1914e4439eeb53b70",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the school-classes record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/SchoolClass"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "school-classes"
+                ],
+                "summary": "update school-classe information",
+                "description": "update school-classe information ",
+                "operationId": "a4b6eec8396f1aed11d04df90bca4cf9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the school-classe record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass role data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "this_is_new_SchoolClass"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/SchoolClass"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "school-classes"
+                ],
+                "summary": "Delete specifi school-classe",
+                "description": "Delete specifi school-classe",
+                "operationId": "1ecb5f6514070822f9aeafbacfefaecf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the school-classe record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/SchoolClass"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Retrieve all users information",
+                "description": "Get permissions users with their relationships",
+                "operationId": "1a225a5d5bf88729b3d0acc4d3de0538",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "save new user information",
+                "description": "Save user information ",
+                "operationId": "9ddc486c6cd3f5d83d62231716bf6c91",
+                "requestBody": {
+                    "description": "Pass user data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "roles.*",
+                                    "roles"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "title",
+                                        "example": "new user"
+                                    },
+                                    "email": {
+                                        "type": "email",
+                                        "format": "email",
+                                        "example": "email@email.com"
+                                    },
+                                    "roles.*": {
+                                        "type": "int",
+                                        "format": "int",
+                                        "example": "3"
+                                    },
+                                    "roles": {
+                                        "type": "array string",
+                                        "format": "roles",
+                                        "example": "[1,3]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Retrieve specific user record information",
+                "description": "Get user information with his relationships",
+                "operationId": "d8c9be92ec1e4da4c1fb2b14d05d17cd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "update user information",
+                "description": "update user information ",
+                "operationId": "22e5096aaa1b36d69c961ce1726d781b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass user data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "roles.*",
+                                    "roles"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "title",
+                                        "example": "this_is_new_permission"
+                                    },
+                                    "permissions.*": {
+                                        "type": "int",
+                                        "format": "permissions.*",
+                                        "example": "1"
+                                    },
+                                    "permissions": {
+                                        "type": "array string",
+                                        "format": "permissions",
+                                        "example": "[1,3]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Delete specifi user",
+                "description": "Delete specifi user",
+                "operationId": "eed9832f984af793b898f4c6f2994247",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user record",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": "Bearer  accessToken"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BaseModel": {
+                "properties": {
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    },
+                    "deleted_at": {
+                        "description": "Soft delete timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    }
+                },
+                "type": "object"
+            },
+            "Grade": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BaseModel"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "readOnly": "true",
+                                "example": "1"
+                            },
+                            "user_id": {
+                                "type": "integer",
+                                "example": "5"
+                            },
+                            "teacher_id": {
+                                "type": "integer",
+                                "example": "5"
+                            },
+                            "lesson_id": {
+                                "type": "integer",
+                                "example": "2"
+                            },
+                            "class_id": {
+                                "type": "integer",
+                                "maxLength": 32,
+                                "example": "2"
+                            },
+                            "grade": {
+                                "type": "integer",
+                                "maxLength": 32,
+                                "example": "100"
+                            },
+                            "created_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                            },
+                            "updated_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                            },
+                            "deleted_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                            }
+                        },
+                        "type": "object",
+                        "xml": {
+                            "name": "Grades"
+                        }
+                    }
+                ]
+            },
+            "Lesson": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BaseModel"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "readOnly": "true",
+                                "example": "1"
+                            },
+                            "weekday": {
+                                "type": "integer",
+                                "example": "5"
+                            },
+                            "class_id": {
+                                "type": "integer",
+                                "example": "5"
+                            },
+                            "start_time": {
+                                "type": "string",
+                                "example": "12:00"
+                            },
+                            "end_time": {
+                                "type": "string",
+                                "maxLength": 32,
+                                "example": "18:00"
+                            },
+                            "grade": {
+                                "type": "integer",
+                                "maxLength": 32,
+                                "example": "100"
+                            },
+                            "created_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                            },
+                            "updated_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                            },
+                            "deleted_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                            }
+                        },
+                        "type": "object",
+                        "xml": {
+                            "name": "Lessons"
+                        }
+                    }
+                ]
+            },
+            "Permission": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BaseModel"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "readOnly": "true",
+                                "example": "1"
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "some_permission"
+                            },
+                            "created_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                            },
+                            "updated_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                            },
+                            "deleted_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                            }
+                        },
+                        "type": "object",
+                        "xml": {
+                            "name": "Permissions"
+                        }
+                    }
+                ]
+            },
+            "Role": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BaseModel"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "readOnly": "true",
+                                "example": "1"
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "some role"
+                            },
+                            "created_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                            },
+                            "updated_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                            },
+                            "deleted_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                            }
+                        },
+                        "type": "object",
+                        "xml": {
+                            "name": "Roles"
+                        }
+                    }
+                ]
+            },
+            "SchoolClass": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BaseModel"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "readOnly": "true",
+                                "example": "1"
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "some class name"
+                            },
+                            "created_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                            },
+                            "updated_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                            },
+                            "deleted_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                            }
+                        },
+                        "type": "object",
+                        "xml": {
+                            "name": "SchoolClasses"
+                        }
+                    }
+                ]
+            },
+            "User": {
+                "required": [
+                    "password"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "User role",
+                        "type": "string",
+                        "readOnly": "true"
+                    },
+                    "email": {
+                        "description": "User unique email address",
+                        "type": "string",
+                        "format": "email",
+                        "readOnly": "true",
+                        "example": "user@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "Jksndfj8sdyuvhsdifs8d9sdfohn"
+                    },
+                    "class_id": {
+                        "type": "integer",
+                        "maxLength": 32,
+                        "example": "3"
+                    },
+                    "email_verified_at": {
+                        "description": "Datetime marker of verification status",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true",
+                        "example": "2019-02-25 12:59:20"
+                    },
+                    "remember_token": {
+                        "type": "string",
+                        "example": "njsdjfbnj43rjnbwr2irbn"
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                    },
+                    "deleted_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Users"
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
