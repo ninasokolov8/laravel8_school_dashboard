@@ -70,6 +70,28 @@
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.relatedData') }}
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+
+        <li class="nav-item">
+            <a class="nav-link" href="#class_users" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.title') }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="class_users">
+            @includeIf('dashboard.lessons.relationships.classUsers', ['users' => $lesson->class->classUsers])
         </div>
     </div>
 </div>

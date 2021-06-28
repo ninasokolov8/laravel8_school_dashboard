@@ -90,11 +90,11 @@
 		}
 		
 		function class() {
-			return $this->belongsTo(SchoolClass::class, 'class_id');
+			return $this->belongsTo(SchoolClass::class, 'class_id','id');
 		}
 		
 		function lessons() {
-			return $this->belongsTo(Lesson::class, 'class_id', 'class_id');
+			return $this->hasMany(Lesson::class, 'class_id', 'class_id');
 		}
 		
 		function grades() {

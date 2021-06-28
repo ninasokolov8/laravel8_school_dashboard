@@ -65,7 +65,7 @@
 		public function show(User $user) {
 			abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 			
-			$user->load('roles', 'class', 'teacherLessons', 'gradeLessons', 'lessons');
+			$user->load('roles', 'class', 'teacherLessons', 'gradeLessons', 'lessons','teacherLessons.class.classUsers');
 			return view('dashboard.users.show', compact('user'));
 		}
 		

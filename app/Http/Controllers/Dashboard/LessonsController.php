@@ -58,8 +58,7 @@
 		public function show(Lesson $lesson) {
 			abort_if(Gate::denies('lesson_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 			
-			$lesson->load('class', 'teacher');
-			
+			$lesson->load('class', 'teacher','class.classUsers');
 			return view('dashboard.lessons.show', compact('lesson'));
 		}
 		

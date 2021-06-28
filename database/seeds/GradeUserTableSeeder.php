@@ -12,7 +12,7 @@
 		public function run() {
 			$grades = [
 				[
-					'user_id' => 8, 'teacher_id' => 5, 'lesson_id' => 1, 'grade' => 96, 'class_id'=>1
+					'user_id' => 13, 'teacher_id' => 4, 'lesson_id' => 4, 'grade' => 96, 'class_id'=>4
 				],
 			];
 			
