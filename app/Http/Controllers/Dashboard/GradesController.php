@@ -2,6 +2,7 @@
 	
 	namespace App\Http\Controllers\Dashboard;
 	
+	use App\Http\Resources\SchoolClassResource;
 	use App\Models\Grade;
 	use App\Http\Controllers\Controller;
 	use App\Http\Requests\MassDestroyGradeRequest;
@@ -10,7 +11,10 @@
 	use App\Models\Lesson;
 	use App\Models\SchoolClass;
 	use App\Models\User;
+	
+	use Illuminate\Http\Resources\Json\JsonResource;
 	use Illuminate\Support\Facades\Gate;
+	use Illuminate\Support\Facades\Request;
 	use Symfony\Component\HttpFoundation\Response;
 	
 	class GradesController extends Controller {
@@ -25,25 +29,13 @@
 		public function create() {
 			abort_if(Gate::denies('lesson_grade_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 			$weekDays = Lesson::WEEK_DAYS;
-			$classes = SchoolClass::with(['classLessons','classUsers'])->get();
-			return view('dashboard.grades.create', compact('classes','weekDays'));
+			$classes = SchoolClass::with(['classLessons', 'classUsers'])->get();
+			return view('dashboard.grades.create', compact('classes', 'weekDays'));
 		}
 		
 		public function store(StoreGradeRequest $request) {
-			$tmp = explode('_',$request['lesson_id']);
-			$dataToSave=[];
-			if(!empty((int)$tmp[1]) && !empty((int)$tmp[1])){
-				$dataToSave = [
-					'user_id' =>(int)$request['user_id'],
-					'teacher_id' =>(int)$tmp[1],
-					'lesson_id' =>(int)$tmp[0],
-					'class_id' =>(int)$request['class_id'],
-					'grade' =>(int)$request['grade'],
-				];
-			}
 			
-			Grade::create($dataToSave);
-			
+			Grade::create($request->all());
 			return redirect()->route('dashboard.grades.index');
 		}
 		
@@ -51,7 +43,7 @@
 			abort_if(Gate::denies('lesson_grade_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 			
 			$weekDays = Lesson::WEEK_DAYS;
-			$grade->load('students', 'lessons','teachers','classes');
+			$grade->load('students', 'lessons', 'teachers', 'classes');
 			
 			
 			return view('dashboard.grades.edit', compact('grade', 'weekDays'));
@@ -66,8 +58,8 @@
 		public function show(Grade $grade) {
 			abort_if(Gate::denies('lesson_grade_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 			$weekDays = Lesson::WEEK_DAYS;
-			$grade->load('students', 'lessons','teachers','classes');
-			return view('dashboard.grades.show', compact('grade','weekDays'));
+			$grade->load('students', 'lessons', 'teachers', 'classes');
+			return view('dashboard.grades.show', compact('grade', 'weekDays'));
 		}
 		
 		public function destroy(Grade $grade) {
@@ -82,5 +74,15 @@
 			Grade::whereIn('id', request('ids'))->delete();
 			
 			return response(null, Response::HTTP_NO_CONTENT);
+		}
+		
+		public function getbyfilter(Request $request) {
+			$myClass = 'App\\Models\\'.$request::get('m');
+			$myClassResource = 'App\\Http\\Resources\\'.$request::get('m').'Resource';
+			$withRelationships = $myClass::WITHRELATIONSGHIP;
+			
+			return new $myClassResource($myClass::where($request::get('param'),
+				$request::get('val'))->with($withRelationships)->get());
+			
 		}
 	}

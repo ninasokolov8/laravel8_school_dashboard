@@ -42,6 +42,10 @@
 					'id' => 9, 'name' => 'Avner - Student', 'email' => 'avner@student.com',
 					'password' => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
 					'remember_token' => null, 'class_id' => 2,
+				], [
+					'id' => 10, 'name' => 'Yoav - Student', 'email' => 'yoav@student.com',
+					'password' => '$2y$10$HvSDJRBDVWwRd18qj5oaQOF0DBXqnZcyFJ4dJA8hcQGAfmyZ7xkei',
+					'remember_token' => null, 'class_id' => 1,
 				],
 			];
 			

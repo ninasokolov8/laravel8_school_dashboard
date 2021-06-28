@@ -15,7 +15,9 @@
 		use SoftDeletes, Notifiable, HasApiTokens;
 		
 		public $table = 'users';
-		
+		const WITHRELATIONSGHIP =[
+			'roles','grades','lessons','class'
+		];
 		protected $hidden = [
 			'password', 'remember_token',
 		];
@@ -44,6 +46,11 @@
 		public function getIsStudentAttribute() {
 			return $this->roles()->where('id', 4)->exists();
 		}
+		public function teacherLessons()
+		{
+			return $this->hasMany(Lesson::class, 'teacher_id', 'id');
+		}
+		
 		
 		public static function getUsersByRole(){
 			$return =[

@@ -40,6 +40,7 @@
 			
 			// Grades
 			Route::delete('grades/destroy', 'GradesController@massDestroy')->name('grades.massDestroy');
+			Route::get('grades/getbyfilter', 'GradesController@getByFilter');
 			Route::resource('grades', 'GradesController');
 			
 			Route::get('calendar', 'CalendarController@index')->name('calendar.index');

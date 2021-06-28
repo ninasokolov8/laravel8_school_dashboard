@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "yajra/laravel-datatables-oracle": "^9.7",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+      "ext-http": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

@@ -16,11 +16,13 @@
 		public function rules() {
 			return [
 				'lesson_id' => [
-					'required'
+					'required', 'integer'
 				], 'user_id' => [
 					'required', 'integer'
 				], 'class_id' => [
-					'required'
+					'required', 'integer'
+				], 'teacher_id' => [
+					'required', 'integer'
 				], 'grade' => [
 					'required', 'integer'
 				],

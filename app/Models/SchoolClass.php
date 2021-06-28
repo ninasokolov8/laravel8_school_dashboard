@@ -2,12 +2,13 @@
 	
 	namespace App\Models;
 	
-	use Illuminate\Database\Eloquent\Model;
 	use Illuminate\Database\Eloquent\SoftDeletes;
 	
-	class SchoolClass extends Model {
+	class SchoolClass extends BaseModel {
 		use SoftDeletes;
-		
+		const WITHRELATIONSGHIP =[
+			'classLessons','classUsers'
+		];
 		public $table = 'school_classes';
 		
 		protected $dates = [

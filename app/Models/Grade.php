@@ -2,12 +2,13 @@
 	
 	namespace App\Models;
 	
-	use Illuminate\Database\Eloquent\Model;
 	use Illuminate\Database\Eloquent\SoftDeletes;
 	
-	class Grade extends Model {
+	class Grade extends BaseModel {
 		use SoftDeletes;
-		
+		const WITHRELATIONSGHIP =[
+			'students','teachers','lessons','classes'
+		];
 		public $table = 'grade_user';
 		
 		protected $dates = [
@@ -15,7 +16,7 @@
 		];
 		
 		protected $fillable = [
-			'user_id', 'teacher_id', 'grade', 'created_at', 'updated_at', 'deleted_at',
+			'user_id', 'teacher_id', 'lesson_id','class_id','grade', 'created_at', 'updated_at', 'deleted_at',
 		];
 		
 		public function students() {

@@ -2,14 +2,15 @@
 	
 	namespace App\Models;
 	
-	use Illuminate\Database\Eloquent\Model;
 	use Illuminate\Database\Eloquent\SoftDeletes;
 	
-	class Role extends Model {
+	class Role extends BaseModel {
 		use SoftDeletes;
 		
 		public $table = 'roles';
-		
+		const WITHRELATIONSGHIP =[
+			'rolesUsers','permissions'
+		];
 		protected $dates = [
 			'created_at', 'updated_at', 'deleted_at',
 		];

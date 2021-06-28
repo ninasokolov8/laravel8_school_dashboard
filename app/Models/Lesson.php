@@ -4,12 +4,13 @@
 	
 	use Carbon\Carbon;
 	use Illuminate\Database\Eloquent\Factories\HasFactory;
-	use Illuminate\Database\Eloquent\Model;
 	use Illuminate\Database\Eloquent\SoftDeletes;
 	
-	class Lesson extends Model {
+	class Lesson extends BaseModel {
 		use SoftDeletes, HasFactory;
-		
+		const WITHRELATIONSGHIP =[
+			'class','teacher'
+		];
 		const WEEK_DAYS = [
 			'1' => 'Sunday', '2' => 'Monday', '3' => 'Tuesday', '4' => 'Wednesday', '5' => 'Thursday', '6' => 'Friday',
 			'7' => 'Saturday',
