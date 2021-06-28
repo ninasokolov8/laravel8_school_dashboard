@@ -41,19 +41,22 @@ Laravel 8 School dashboard that includes the following:
 * Laravel Authentication
 * Migration
 * Admin dashboard
-* User managment
-* Class managment
-* Lessons managment
-* Grades managment
+* User management
+* Class management
+* Lessons management
+* Grades management
 * Permissions
 * Roles
 * RestApi
+* Swagger Api documentation
+* http testing
 
 
 ### Built With
 
 * [Bootstrap](https://getbootstrap.com)
 * [Laravel](https://laravel.com)
+* [Swagger](https://swagger.io/)
 
 
 
@@ -91,6 +94,8 @@ in the workspace terminal run the following commands-
 -    **composer install**
 -    **php artisan key:generate**
 -    **php artisan migrate --seed**
+-    **php artisan passport:client --personal** 
+-    **php artisan l5-swagger:generate**
 
 This will automatically create all the tables you need in the database.
 
@@ -106,6 +111,12 @@ password: password
 student -
 login: avi@student.com
 password: password
+
+
+<!-- URls -->
+## URls
+- swagger Api documentation - http://localhost/Api/documentation
+- http testing - http://localhost/api-tester 
 
 ENJOY!
 
