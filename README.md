@@ -75,7 +75,7 @@ I really (!) recommend to use <a href="https://laradock.io/">Laradock</a>  for f
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/tobolkin8/BP_laravelApp.git
+   git clone https://github.com/ninasokolov8/laravel8_school_dashboard.git
    ```
 2. Please follow the instructions - start with section  A.1 <a href="https://laradock.io/getting-started/">Laradock-getting-started</a>
 
