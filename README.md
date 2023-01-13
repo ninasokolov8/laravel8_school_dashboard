@@ -125,7 +125,7 @@ ENJOY!
 <!-- CONTACT -->
 ## Contact
 
-Nina Tobolkin -  tobolkin8@gmail.com
+Nina Tobolkin -  sokolov8nina@gmail.com
 
 
 
